@@ -241,8 +241,13 @@ class PrediccionAgregadaView(APIView):
     
     def get(self, request):
         try:
-            meses = int(request.query_params.get('meses', 12))
-            top_productos = int(request.query_params.get('top_productos', 5))
+            # Limitar a 6 meses por defecto para Render gratuito
+            meses = int(request.query_params.get('meses', 6))
+            if meses > 12:
+                meses = 12  # Máximo 12 meses
+            top_productos = int(request.query_params.get('top_productos', 3))
+            if top_productos > 5:
+                top_productos = 5  # Máximo 5 productos
             
             predictor = obtener_predictor()
             resultado = predictor.predecir_ventas_totales_agregadas(

@@ -272,10 +272,10 @@ class PrediccionVentas:
         
         fecha_actual = datetime.now()
         
-        # Limitar productos para optimizar (max 30 productos)
+        # Limitar productos para Render gratuito (max 10 productos para evitar OOM)
         productos = Producto.objects.filter(stock__gt=0).select_related(
             'categoria', 'marca'
-        ).values('id', 'nombre', 'precio')[:30]
+        ).values('id', 'nombre', 'precio')[:10]
         
         # Almacenar predicciones por mes
         predicciones_por_mes = defaultdict(lambda: {
