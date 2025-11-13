@@ -1,0 +1,133 @@
+{
+  "info": {
+    "name": "ML Predicciones API",
+    "description": "API para predicciones de ventas con Random Forest",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/api/predicciones/health/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "predicciones", "health", ""]
+        },
+        "description": "Verifica el estado del servicio y del modelo"
+      }
+    },
+    {
+      "name": "Entrenar Modelo",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8000/api/predicciones/entrenar/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "predicciones", "entrenar", ""]
+        },
+        "description": "Entrena el modelo Random Forest con datos históricos"
+      }
+    },
+    {
+      "name": "Predecir Ventas",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"producto_id\": 1,\n  \"mes\": 12,\n  \"anio\": 2025,\n  \"dias_futuro\": 30\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/predicciones/predecir/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "predicciones", "predecir", ""]
+        },
+        "description": "Predice las ventas de un producto específico"
+      }
+    },
+    {
+      "name": "Tendencia Ventas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/api/predicciones/tendencia/1/?meses=6",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "predicciones", "tendencia", "1", ""],
+          "query": [
+            {
+              "key": "meses",
+              "value": "6"
+            }
+          ]
+        },
+        "description": "Obtiene la tendencia de ventas para los próximos N meses"
+      }
+    },
+    {
+      "name": "Top Productos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/api/predicciones/top-productos/?top=10&mes=12&anio=2025",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "predicciones", "top-productos", ""],
+          "query": [
+            {
+              "key": "top",
+              "value": "10"
+            },
+            {
+              "key": "mes",
+              "value": "12"
+            },
+            {
+              "key": "anio",
+              "value": "2025"
+            }
+          ]
+        },
+        "description": "Obtiene los productos con mayor predicción de ventas"
+      }
+    },
+    {
+      "name": "Estadísticas Ventas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/api/predicciones/estadisticas/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "predicciones", "estadisticas", ""]
+        },
+        "description": "Obtiene estadísticas generales de ventas"
+      }
+    }
+  ]
+}
